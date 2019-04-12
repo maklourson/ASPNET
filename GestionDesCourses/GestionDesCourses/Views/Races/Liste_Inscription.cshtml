@@ -1,0 +1,49 @@
+﻿@model IEnumerable<BO.Inscription>
+
+@{
+    ViewBag.Title = "Mes inscriptions";
+}
+
+<h2>Mes inscriptions</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nom Course
+        </th>
+        <th>
+           Horaire Début
+        </th>
+        <th>
+            Horaire Fin
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RaceTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RaceStart)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.RaceEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.ActionLink("Désinscrire", "Desinscription", "Races", new { id = item.Id }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Details", "Details", new { id = item.RaceId }, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>
+@Html.ActionLink("Retour à la liste des courses", "Index")

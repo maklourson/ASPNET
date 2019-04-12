@@ -1,0 +1,48 @@
+﻿@model BO.DisplayConfiguration
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DisplayConfiguration</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeviceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeviceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpeedAvg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpeedAvg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpeedMax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpeedMax)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.uniteDistance.unite)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

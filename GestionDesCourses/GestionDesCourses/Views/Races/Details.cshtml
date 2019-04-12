@@ -1,0 +1,109 @@
+@model GestionDesCourses.Models.RaceViewModel
+
+@{
+    ViewBag.Title = "Details";
+
+}
+
+<h2>Details de la course</h2>
+
+<div class="row">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.Category)
+        </dt>
+        <dd>
+            @if (Model.Race.Category != null)
+            {
+                @Html.DisplayFor(model => model.Race.Category.Title);
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.DateStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.DateStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.DateEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.DateEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Race.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Race.ZipCode)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <p>Ici liste des participants??</p>
+</div>
+
+<div class="row">
+    <div id="lamap"></div>
+</div>
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Modifier", "Edit", new { id = Model.Race.Id }, new { @class = "btn btn-default" })
+    }
+    @Html.ActionLink("S'inscrire", "Inscription", new { id = Model.Race.Id, amount = Model.Race.Price, title = Model.Race.Category.Title, end = Model.Race.DateEnd, start = Model.Race.DateStart }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Annuler", "Index", "Races", new { @class = "btn btn-default" })
+    @* Ci dessous : bouton qui envoie vers la liste des participants inscrits à la course : A FAIRE
+        Visible que si admin? *@
+    @Html.ActionLink("Voir la liste des participants", "Details", new { id = Model.Race.Id }, new { @class = "btn btn-default" })
+</p>
+<p>
+    @Html.ActionLink("Retour à la liste des courses", "Index")
+    <br/>
+    @Html.ActionLink("Retour à la liste des inscriptions", "Liste_Inscription")
+</p>
+
+<script>
+    window.onload = (function () {
+  
+        @{foreach (var p in Model.Race.Pois) {
+             <Text> recupInfoMapByGpx('@p.Description');</Text>
+         } }
+    });
+   
+
+       
+
+</script>

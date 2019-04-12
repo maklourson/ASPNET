@@ -1,0 +1,50 @@
+﻿@model BO.Inscription
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Inscription</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdentityModelId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdentityModelId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeInscriptionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TypeInscriptionId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

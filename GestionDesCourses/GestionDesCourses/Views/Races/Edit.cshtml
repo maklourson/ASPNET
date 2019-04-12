@@ -1,0 +1,122 @@
+@model GestionDesCourses.Models.RaceViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Modification d'une course</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Race.Id)
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Race.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Race.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Race.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Race.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IdSelectedCategory, Model.Categories.Select(a => new SelectListItem { Text = a.Title, Value = a.Id.ToString() }), new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Race.DateStart, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Race.DateStart, new { htmlAttributes = new { @class = "form-control" } })
+                
+                @* @Html.ValidationMessageFor(model => model.Race.DateStart, "", new { @class = "text-danger" }) *@
+
+                @* Gestion pour pouvoir afficher plusieurs erreurs : *@
+                @if (Html.ViewData.ModelState["Race.DateStart"] != null
+                    && Html.ViewData.ModelState["Race.DateStart"].Errors != null
+                    && Html.ViewData.ModelState["Race.DateStart"].Errors.Count() != 0)
+                {
+                    <p class="text-danger">La date de début est incorrecte</p>
+                    <ul>
+                        @foreach (var error in Html.ViewData.ModelState["Race.DateStart"].Errors)
+                    {
+                            <li class="text-danger">@error.ErrorMessage</li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Race.DateEnd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Race.DateEnd, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.ValidationMessageFor(model => model.Race.DateEnd, "", new { @class = "text-danger" })*@
+                
+                @* Gestion pour pouvoir afficher plusieurs erreurs : *@
+                @if (Html.ViewData.ModelState["Race.DateEnd"] != null
+                    && Html.ViewData.ModelState["Race.DateEnd"].Errors != null
+                    && Html.ViewData.ModelState["Race.DateEnd"].Errors.Count() != 0)
+                {
+                    <p class="text-danger">La date de fin est incorrecte </p>
+                    <ul>
+                        @foreach (var error in Html.ViewData.ModelState["Race.DateEnd"].Errors)
+                    {
+                            <li class="text-danger">@error.ErrorMessage</li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Race.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Race.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Race.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Race.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Race.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Race.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Race.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Race.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Race.ZipCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Retour à la liste des courses", "Index")
+</div>
+
+@* ce script semble poser problème pour les dates dans le formulaire 
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+*@
